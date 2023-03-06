@@ -5,6 +5,16 @@ using Status;
 var builder = WebApplication.CreateBuilder(args);
 
 // This is where we configure "services" - Entities, Values, Services
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(pol =>
+    {
+        pol.AllowAnyOrigin();
+        pol.AllowAnyHeader();
+        pol.AllowAnyMethod();
+    });
+});
+
 var connectionString = "host=localhost;database=status_dev;username=postgres;password=TokyoJoe138!;port=5432";
 builder.Services.AddMarten(options => 
 {
@@ -13,6 +23,8 @@ builder.Services.AddMarten(options =>
 });
 
 var app = builder.Build();
+
+app.UseCors();
 
 app.MapGet("/status", async (IDocumentSession db) =>
 {
