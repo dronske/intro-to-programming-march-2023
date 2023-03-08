@@ -1,10 +1,19 @@
-﻿namespace Banking.UnitTests;
+﻿using Banking.Domain;
+using System.Runtime.InteropServices;
+
+namespace Banking.UnitTests;
 
 public class GoldCustomerDeposits
 {
     [Fact]
     public void GoldCustomersGetABonusOnDeposits()
     {
-        Assert.True(false);
+        var account = new GoldBankAccount();
+        var openingBalance = account.GetBalance();
+        var amountToDeposit = 100M;
+
+        account.Deposit(amountToDeposit);
+
+        Assert.Equal(amountToDeposit + openingBalance + 10M, account.GetBalance());
     }
 }
