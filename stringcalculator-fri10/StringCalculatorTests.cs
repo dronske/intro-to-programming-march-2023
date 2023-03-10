@@ -7,7 +7,7 @@ public class StringCalculatorTests
     public StringCalculatorTests()
     {
         // Using a dummy test double
-        _calculator = new StringCalculator(new Mock<ILogger>().Object);
+        _calculator = new StringCalculator(new Mock<ILogger>().Object, new Mock<IWebService>().Object);
     }
     [Fact]
     public void EmptyStringReturnsZero()
