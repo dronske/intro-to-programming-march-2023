@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Banking.Domain\Banking.Domain.csproj" />
+    <ProjectReference Include="..\OnCallDeveloperApi\OnCallDeveloperApi.csproj" />
   </ItemGroup>
 
 </Project>
