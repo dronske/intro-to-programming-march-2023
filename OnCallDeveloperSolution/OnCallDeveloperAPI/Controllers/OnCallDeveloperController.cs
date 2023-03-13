@@ -10,6 +10,7 @@ public class OnCallDeveloperController : ControllerBase
     }
 
     [HttpGet("/oncalldeveloper")]
+    [ResponseCache(Location=ResponseCacheLocation.Any, Duration = 30)]
     public ActionResult GetOnCallDeveloper()
     {
         GetOnCallDeveloperResponse response;
