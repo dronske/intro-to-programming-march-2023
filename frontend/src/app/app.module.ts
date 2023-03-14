@@ -9,6 +9,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { SupportComponent } from './components/support/support.component';
 import { HttpClientModule } from '@angular/common/http'
 import { OnCallDataService } from './services/oncall-data.service';
+import { CounterModule } from './features/counter/counter.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { OnCallDataService } from './services/oncall-data.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    CounterModule
   ],
   providers: [OnCallDataService],
   bootstrap: [AppComponent]
