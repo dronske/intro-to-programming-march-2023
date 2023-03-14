@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { CounterComponent } from './counter.component';
+import { StoreModule } from '@ngrx/store';
+import { featureName, reducers } from './state';
 
 @NgModule({
   declarations: [
@@ -8,6 +10,7 @@ import { CounterComponent } from './counter.component';
   ],
   imports: [
     CommonModule,
+    StoreModule.forFeature(featureName, reducers)
   ],
   exports: [CounterComponent]
 })
