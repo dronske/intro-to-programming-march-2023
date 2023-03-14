@@ -1,7 +1,6 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { CounterComponent } from './counter.component';
-import { RouterModule, Routes } from '@angular/router';
 
 @NgModule({
   declarations: [
