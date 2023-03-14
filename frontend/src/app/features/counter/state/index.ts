@@ -22,3 +22,5 @@ export const selectCounterCurrent = createSelector(
     selectCounterBranch,
     b => b.current
 );
+
+export const selectCountBy = createSelector(selectCounterBranch, b => b.by);
