@@ -1,5 +1,9 @@
 # The Angular CLI
 
+
+[Angular.io](https://angular.io/)
+
+[Angular CLI "Ng"](https://angular.io/cli)
 ## Installing
 
 ```shell

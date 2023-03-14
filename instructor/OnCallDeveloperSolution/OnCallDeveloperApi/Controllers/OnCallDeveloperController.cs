@@ -8,14 +8,16 @@ public class OnCallDeveloperController : ControllerBase
 
     public OnCallDeveloperController(IProvideTheBusinessClock businessClock)
     {
-        _businessClock = businessClock;
+        this._businessClock = businessClock;
     }
 
 
     // GET /oncalldeveloper -> 200 Ok
     [HttpGet("/oncalldeveloper")]
+    [ResponseCache(Location=ResponseCacheLocation.Any, Duration = 30)]
     public ActionResult GetOnCallDeveloper()
     {
+      
         GetOnCallDeveloperResponse response; 
         // WTCYWYH
         if(_businessClock.IsDuringBusinessHours())
@@ -25,7 +27,7 @@ public class OnCallDeveloperController : ControllerBase
         } else
         {
             response =
-            new GetOnCallDeveloperResponse("OnCallCorp Customer Service", "800 GOOD-LUCK", "oncall@company.com");
+            new GetOnCallDeveloperResponse("OnCallCorp Customer Service" + DateTime.Now.ToString(), "800 GOOD-LUCK", "oncall@company.com");
         }
        
         return Ok(response); // 200 status code
