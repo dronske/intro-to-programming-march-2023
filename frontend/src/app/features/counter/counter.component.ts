@@ -22,4 +22,8 @@ export class CounterComponent {
     // this.current--;
     this.store.dispatch(counterEvents.decrementButtonClicked());
   }
+
+  reset() {
+    this.store.dispatch(counterEvents.resetClicked());
+  }
 }
