@@ -8,4 +8,6 @@ public class LearningResourcesEntity
     public string Link { get; set; } = string.Empty;
     public DateTime WhenCreated { get; set; }
     public DateTime? WhenRemoved { get; set; }
+
+    public bool HasBeenWatched { get; set; }
 }
