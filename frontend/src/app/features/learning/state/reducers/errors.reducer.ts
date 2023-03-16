@@ -10,4 +10,6 @@ const initialState: ErrorsState = {
 export const reducer = createReducer(initialState,
     on(errorsEvents.errorHappened, (s,a) => ({
         ...s, hasError: true, errorMessage: a.message
-    })));
+    })),
+    on(errorsEvents.errorCleared, s => ({...s, hasError: false, errorMessage: ''}))
+    );
