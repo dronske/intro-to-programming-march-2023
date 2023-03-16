@@ -58,5 +58,21 @@ namespace LearningResourcesApi.Domain
         {
             return new LearningResourcesSummaryItem(item.Id.ToString(), item.Name, item.Description, item.Link, item.HasBeenWatched);
         }
+
+        public async Task<bool> MoveItemToWatchedAsync(LearningResourcesSummaryItem request)
+        {
+            var id = int.Parse(request.Id);
+            var item = await _context.GetActiveLearningResources()
+                .SingleOrDefaultAsync(item => item.Id == id);
+            if(item != null)
+            {
+                item.HasBeenWatched = true;
+                await _context.SaveChangesAsync();
+                return true;
+            } else
+            {
+                return false;
+            }
+        }
     }
 }
