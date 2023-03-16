@@ -12,6 +12,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { ItemsEffects } from './state/effects/items.effects';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ErrorDisplayComponent } from './components/error-display/error-display.component';
 
 const routes:Routes = [
   {
@@ -44,7 +45,8 @@ const routes:Routes = [
     NagivationComponent,
     ListComponent,
     OverviewComponent,
-    NewComponent
+    NewComponent,
+    ErrorDisplayComponent
   ],
   imports: [
     CommonModule,

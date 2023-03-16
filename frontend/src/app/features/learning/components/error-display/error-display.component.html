@@ -1,0 +1,5 @@
+<div class="alert alert-danger" *ngIf="(hasError$ | async)">
+    <h2>There was an error!</h2>
+    <p>{{errorMessage$ | async}}</p>
+    <button (click)="clear()" class="btn btn-danger">Clear</button>
+</div>
