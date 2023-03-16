@@ -6,11 +6,12 @@ namespace LearningResourcesApi.Controllers;
 
 public class LearningResourcesController : ControllerBase
 {
-    private readonly LearningResourcesDataContext _context;
+   
+    private readonly IManageLearningResources _resourceManager;
 
-    public LearningResourcesController(LearningResourcesDataContext context)
+    public LearningResourcesController(IManageLearningResources resourceManager)
     {
-        _context = context;
+        _resourceManager = resourceManager;
     }
 
     [HttpPost("/learning-resources")]
@@ -23,23 +24,8 @@ public class LearningResourcesController : ControllerBase
         {
             return BadRequest(ModelState);
         }
-        // Add it to the database.
-        //   - turn the request -> Domain.LearningResourcesEntity
-        var entity = new LearningResourcesEntity
-        { 
-            // "Mapping" - AutoMapper
-            Name = request.Name,
-            Description = request.Description,
-            Link = request.Link,
-            WhenCreated = DateTime.Now
-        };
-        //   - tell our DataContext about it.
-        _context.LearningResources.Add(entity);
-        //   - tell the DataContext to save the data.
-        await _context.SaveChangesAsync();
-        // Return a Success Status Code*
-        //   - With a copy of the brand new entity
-        var response = new LearningResourceSummaryItem(entity.Id.ToString(), entity.Name, entity.Description, entity.Link);
+
+        LearningResourceSummaryItem response = await _resourceManager.AddResourceAsync(request);
         return Ok(response);
 
     }
@@ -48,14 +34,9 @@ public class LearningResourcesController : ControllerBase
     [HttpGet("/learning-resources")]
     public async Task<ActionResult<LearningResourcesResponse>> GetLearningResources(CancellationToken token)
     {
-        // await Task.Delay(3000, token);
-        var data = await _context.LearningResources
-            .Where(item => item.WhenRemoved == null)
-            .Select(item => new LearningResourceSummaryItem(
-                item.Id.ToString(), item.Name, item.Description, item.Link))
-            .ToListAsync(token);
 
-        var response = new LearningResourcesResponse(data);
+        // Write the Code I wish I had
+        LearningResourcesResponse response = await _resourceManager.GetCurrentResourcesAsync(token);
         return Ok(response);
     }
 }
