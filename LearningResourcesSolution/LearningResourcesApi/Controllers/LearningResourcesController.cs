@@ -35,7 +35,7 @@ public class LearningResourcesController : ControllerBase
             return Ok(response);
         }
 
-    [HttpGet("/learning-resources/{resourceId:int}")]
+        [HttpGet("/learning-resources/{resourceId:int}")]
         public async Task<ActionResult<LearningResourcesSummaryItem>> GetById(int resourceId)
         {
             LearningResourcesSummaryItem? response = await _resourceManager.GetResourceByIdAsync(resourceId);
