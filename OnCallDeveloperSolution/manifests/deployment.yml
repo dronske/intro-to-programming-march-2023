@@ -4,6 +4,7 @@ metadata:
   name: oncalldeveloper
   namespace: hypertheory
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: oncalldeveloper
