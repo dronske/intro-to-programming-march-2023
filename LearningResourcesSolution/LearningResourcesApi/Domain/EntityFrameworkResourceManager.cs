@@ -1,4 +1,5 @@
-﻿using System.Reflection.Metadata.Ecma335;
+﻿using LearningResourcesApi.Models;
+using System.Reflection.Metadata.Ecma335;
 
 namespace LearningResourcesApi.Domain
 {
@@ -25,11 +26,18 @@ namespace LearningResourcesApi.Domain
             return response;
         }
 
+
+        public async Task<LearningResourcesResponse> GetCurrentResourcesAsync(CancellationToken token, bool watched)
+        {
+            var data = await GetItems().Where(item => item.HasBeenWatched == watched).ToListAsync();
+
+            var response = new LearningResourcesResponse(data);
+            return response;
+        }
+
         public async Task<LearningResourcesResponse> GetCurrentResourcesAsync(CancellationToken token)
         {
-            var data = await _context.GetActiveLearningResources()
-                .Select(item => MapFromDomain(item))
-                .ToListAsync(token);
+            var data = await GetItems().ToListAsync(token);
             var response = new LearningResourcesResponse(data);
             return response;
         }
@@ -74,5 +82,12 @@ namespace LearningResourcesApi.Domain
                 return false;
             }
         }
+
+        private IQueryable<LearningResourcesSummaryItem> GetItems()
+        {
+            return _context.GetActiveLearningResources()
+                .Select(item => MapFromDomain(item));
+        }
+
     }
 }
